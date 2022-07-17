@@ -16,22 +16,22 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="硬件 :  刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台        一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上【建议插到USB2.0口上】，然后到软件中心安装虚拟内存插件   进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G，最后创建虚拟内存等待完成即可">
+    <meta name="description" content="硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台            一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上【建议插到USB2.0口上】，然后到软件中心安装虚拟内存插件   进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G :   最后创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R7000梅林固件设置虚拟内存">
 <meta property="og:url" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="硬件 :  刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台        一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上【建议插到USB2.0口上】，然后到软件中心安装虚拟内存插件   进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G，最后创建虚拟内存等待完成即可">
+<meta property="og:description" content="硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台            一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上【建议插到USB2.0口上】，然后到软件中心安装虚拟内存插件   进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G :   最后创">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/001.png">
 <meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/002.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/003.png">
 <meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/004.png">
 <meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005.png">
+<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005-1.png">
+<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006-1.png">
 <meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/007.png">
 <meta property="article:published_time" content="2022-07-17T06:58:35.000Z">
-<meta property="article:modified_time" content="2022-07-17T09:34:02.288Z">
+<meta property="article:modified_time" content="2022-07-17T12:18:15.268Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -306,27 +306,31 @@
             
               <div class="markdown-body">
                 
-                <p>硬件 :  刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台<br>        一个 8G 的U盘 </p>
+                <p>硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台<br>            一个 8G 的U盘 </p>
 <p>首先使用 DiskGenius 把U盘格式化为ext4 格式。</p>
 <img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/001.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
 <img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/002.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/003.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
+
 
 
 
 <p>格式化好U盘之后，把U盘插到路由器上【建议插到USB2.0口上】，然后到软件中心安装虚拟内存插件</p>
 <img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/004.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
-<p>进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G，最后创建虚拟内存等待完成即可</p>
+<p>进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G :</p>
 <img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
+<p>最后创建虚拟内存等待完成即可 </p>
+<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005-1.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
-<p>注意，刚刚创建完虚拟内存之后 ，立刻查看虚拟内存大小，不管是在命令行还是在 路由器界面都无法看到刚才创建的虚拟内存，需要等待几分钟， 在命令行时刻观察虚拟内存大小，等这个数值涨到指定的大小之后虚拟内存才可以使用。</p>
+
+<p>注意，如果你在刚创建完虚拟内存之后就查看虚拟内存大小，不管是在命令行 还是在路由器界面看到的虚拟内大小都是0 ，需要等待几分钟， 在命令行时刻观察虚拟内存大小，等这个数值涨到指定的大小之后虚拟内存才可以使用。</p>
+<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006-1.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
+
 <img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/007.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
                 
               </div>
