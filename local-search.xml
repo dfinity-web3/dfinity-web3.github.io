@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>网件R7000梅林固件使用遇到的几个小问题</title>
+    <link href="/2022/07/23/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
+    <url>/2022/07/23/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>    目前手头有一个Netgear R7000 ,刷了梅林固件380.70_0-X7.9.1 。</p><p>    按照油管网友的教程使用离线安装的方式(<a href="https://www.youtube.com/watch?v=LwYMQEyUz60">https://www.youtube.com/watch?v=LwYMQEyUz60</a>) 刷了 clash 固件用来fq很好用。在这过程中也遇到了各种问题。最常见的比如说 安装的时候提示 有敏感词的问题，需要开启ssh 登录路由器后台输入shell 命令解除。</p><p>   我想再安装一些其他的插件，比如说frpc 实现内网穿透，但是发现软件中心无法更新， 一直显示版本0.0，经过搜索发现是 380版本固件用的是 <a href="https://ngrok.wang/">https://ngrok.wang</a> 这个域名，但是这个域名过期了。</p><p>还需要ssh 登录后台shell 命令修改域名 ：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">sed -<span class="hljs-selector-tag">i</span> &#x27;s/koolshare<span class="hljs-selector-class">.ngrok</span><span class="hljs-selector-class">.wang</span>/ks<span class="hljs-selector-class">.ddnsto</span><span class="hljs-selector-class">.com</span>/g&#x27; /koolshare/scripts/ks_app_install<span class="hljs-selector-class">.sh</span><br>sed -<span class="hljs-selector-tag">i</span> &#x27;s/koolshare<span class="hljs-selector-class">.ngrok</span><span class="hljs-selector-class">.wang</span>/ks<span class="hljs-selector-class">.ddnsto</span><span class="hljs-selector-class">.com</span>/g&#x27; /koolshare/webs/Main_Soft_center<span class="hljs-selector-class">.asp</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>系统管理</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>R7000梅林固件设置虚拟内存</title>
     <link href="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/"/>
     <url>/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</url>

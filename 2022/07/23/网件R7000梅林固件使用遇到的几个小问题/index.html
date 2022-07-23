@@ -16,30 +16,22 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台            一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上 [ 建议插到USB2.0口上,我曾经把U盘插到USB3.0口上结果虚拟内存运行一会clash插件失灵了，我只测试了一次，为了保险起见还是插到2.0口">
+    <meta name="description" content="目前手头有一个Netgear R7000 ,刷了梅林固件380.70_0-X7.9.1 。     按照油管网友的教程使用离线安装的方式(https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;LwYMQEyUz60) 刷了 clash 固件用来fq很好用。在这过程中也遇到了各种问题。最常见的比如说 安装的时候提示 有敏感词的问题，需要开启ssh 登录路由器后台输入shell 命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="R7000梅林固件设置虚拟内存">
-<meta property="og:url" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/index.html">
+<meta property="og:title" content="网件R7000梅林固件使用遇到的几个小问题">
+<meta property="og:url" content="http://example.com/2022/07/23/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台            一个 8G 的U盘  首先使用 DiskGenius 把U盘格式化为ext4 格式。         格式化好U盘之后，把U盘插到路由器上 [ 建议插到USB2.0口上,我曾经把U盘插到USB3.0口上结果虚拟内存运行一会clash插件失灵了，我只测试了一次，为了保险起见还是插到2.0口">
+<meta property="og:description" content="目前手头有一个Netgear R7000 ,刷了梅林固件380.70_0-X7.9.1 。     按照油管网友的教程使用离线安装的方式(https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;LwYMQEyUz60) 刷了 clash 固件用来fq很好用。在这过程中也遇到了各种问题。最常见的比如说 安装的时候提示 有敏感词的问题，需要开启ssh 登录路由器后台输入shell 命令">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/001.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/002.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/004.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005-1.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006-1.png">
-<meta property="og:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006.png">
-<meta property="article:published_time" content="2022-07-17T06:58:35.000Z">
-<meta property="article:modified_time" content="2022-07-17T16:13:40.555Z">
+<meta property="article:published_time" content="2022-07-23T12:40:02.000Z">
+<meta property="article:modified_time" content="2022-07-23T13:00:37.514Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/001.png">
   
   
   
-  <title>R7000梅林固件设置虚拟内存 - 黑暗中的矩阵</title>
+  <title>网件R7000梅林固件使用遇到的几个小问题 - 黑暗中的矩阵</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -221,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="R7000梅林固件设置虚拟内存"></span>
+            <span id="subtitle" data-typed-text="网件R7000梅林固件使用遇到的几个小问题"></span>
           
         </div>
 
@@ -232,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-17 09:58" pubdate>
-          2022年7月17日 上午
+        <time datetime="2022-07-23 15:40" pubdate>
+          2022年7月23日 下午
         </time>
       </span>
     
@@ -244,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          334 字
+          490 字
         
       </span>
     
@@ -255,7 +247,7 @@
         
         
         
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -301,35 +293,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">R7000梅林固件设置虚拟内存</h1>
+            <h1 style="display: none">网件R7000梅林固件使用遇到的几个小问题</h1>
             
             
               <div class="markdown-body">
                 
-                <p>硬件准备 :   刷了梅林380.70_0-X7.9.1固件的 网件R7000路由器一台<br>            一个 8G 的U盘 </p>
-<p>首先使用 DiskGenius 把U盘格式化为ext4 格式。</p>
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/001.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/002.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-
-
-
-
-<p>格式化好U盘之后，把U盘插到路由器上 <span style="color:rgb(200, 0, 0);">[ 建议插到USB2.0口上,我曾经把U盘插到USB3.0口上结果虚拟内存运行一会clash插件失灵了，我只测试了一次，为了保险起见还是插到2.0口上吧 ] </span><br>，然后到软件中心安装虚拟内存插件</p>
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/004.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-<p>进入虚拟内存插件后可以看到状态，选择虚拟内存大小，建议512M或1G :</p>
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-<p>最后创建虚拟内存等待完成即可 </p>
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/005-1.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-
-<p><span style="color:rgb(200, 0, 0);">注意，如果你在刚创建完虚拟内存之后就查看虚拟内存大小，不管是在命令行 还是在路由器界面看到的虚拟内大小都是0 ，需要等待几分钟， 在命令行时刻观察虚拟内存大小，等这个数值涨到指定的大小之后虚拟内存才可以使用。</span></p>
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006-1.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-<img src="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/006.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
+                <p>    目前手头有一个Netgear R7000 ,刷了梅林固件380.70_0-X7.9.1 。</p>
+<p>    按照油管网友的教程使用离线安装的方式(<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LwYMQEyUz60">https://www.youtube.com/watch?v=LwYMQEyUz60</a>) 刷了 clash 固件用来fq很好用。在这过程中也遇到了各种问题。最常见的比如说 安装的时候提示 有敏感词的问题，需要开启ssh 登录路由器后台输入shell 命令解除。</p>
+<p>   我想再安装一些其他的插件，比如说frpc 实现内网穿透，但是发现软件中心无法更新， 一直显示版本0.0，经过搜索发现是 380版本固件用的是 <a target="_blank" rel="noopener" href="https://ngrok.wang/">https://ngrok.wang</a> 这个域名，但是这个域名过期了。</p>
+<p>还需要ssh 登录后台shell 命令修改域名 ：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">sed -<span class="hljs-selector-tag">i</span> &#x27;s/koolshare<span class="hljs-selector-class">.ngrok</span><span class="hljs-selector-class">.wang</span>/ks<span class="hljs-selector-class">.ddnsto</span><span class="hljs-selector-class">.com</span>/g&#x27; /koolshare/scripts/ks_app_install<span class="hljs-selector-class">.sh</span><br>sed -<span class="hljs-selector-tag">i</span> &#x27;s/koolshare<span class="hljs-selector-class">.ngrok</span><span class="hljs-selector-class">.wang</span>/ks<span class="hljs-selector-class">.ddnsto</span><span class="hljs-selector-class">.com</span>/g&#x27; /koolshare/webs/Main_Soft_center<span class="hljs-selector-class">.asp</span><br></code></pre></td></tr></table></figure>
 
 
                 
@@ -376,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>R7000梅林固件设置虚拟内存</div>
-      <div>http://example.com/2022/07/17/R7000梅林固件设置虚拟内存/</div>
+      <div>网件R7000梅林固件使用遇到的几个小问题</div>
+      <div>http://example.com/2022/07/23/网件R7000梅林固件使用遇到的几个小问题/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月17日</div>
+          <div>2022年7月23日</div>
         </div>
       
       
@@ -419,18 +392,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/23/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/" title="网件R7000梅林固件使用遇到的几个小问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网件R7000梅林固件使用遇到的几个小问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/11/win10%E5%92%8CMac%E5%8F%8C%E7%B3%BB%E7%BB%9F%E8%A3%85%E6%9C%BA%E6%95%B4%E7%90%86%E5%AE%8C%E7%BE%8E%E5%90%AF%E5%8A%A8/" title="win10和Mac双系统装机整理完美启动">
-                        <span class="hidden-mobile">win10和Mac双系统装机整理完美启动</span>
+                      <a href="/2022/07/17/R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" title="R7000梅林固件设置虚拟内存">
+                        <span class="hidden-mobile">R7000梅林固件设置虚拟内存</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
