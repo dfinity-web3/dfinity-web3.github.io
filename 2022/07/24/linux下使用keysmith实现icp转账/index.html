@@ -16,27 +16,22 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上插件 frpc">
+    <meta name="description" content="通过同样的一组私钥， plug 钱包和 keysmith 工具生成的地址是一样的， 本视频介绍使用keysmith来创建icp地址和转账。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网件R7000梅林固件使用frp实现群晖唤醒和远程访问">
-<meta property="og:url" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/index.html">
+<meta property="og:title" content="linux下使用keysmith实现icp转账">
+<meta property="og:url" content="http://example.com/2022/07/24/linux%E4%B8%8B%E4%BD%BF%E7%94%A8keysmith%E5%AE%9E%E7%8E%B0icp%E8%BD%AC%E8%B4%A6/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上插件 frpc">
+<meta property="og:description" content="通过同样的一组私钥， plug 钱包和 keysmith 工具生成的地址是一样的， 本视频介绍使用keysmith来创建icp地址和转账。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/001.png">
-<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/003.jpg">
-<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png">
-<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/004.jpg">
-<meta property="article:published_time" content="2022-07-24T04:45:07.000Z">
-<meta property="article:modified_time" content="2022-07-24T09:03:46.979Z">
+<meta property="article:published_time" content="2022-07-24T10:12:41.000Z">
+<meta property="article:modified_time" content="2022-07-24T10:16:26.317Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/001.png">
   
   
   
-  <title>网件R7000梅林固件使用frp实现群晖唤醒和远程访问 - 黑暗中的矩阵</title>
+  <title>linux下使用keysmith实现icp转账 - 黑暗中的矩阵</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网件R7000梅林固件使用frp实现群晖唤醒和远程访问"></span>
+            <span id="subtitle" data-typed-text="linux下使用keysmith实现icp转账"></span>
           
         </div>
 
@@ -229,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-24 07:45" pubdate>
-          2022年7月24日 早上
+        <time datetime="2022-07-24 13:12" pubdate>
+          2022年7月24日 下午
         </time>
       </span>
     
@@ -241,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          64 字
         
       </span>
     
@@ -252,7 +247,7 @@
         
         
         
-          14 分钟
+          1 分钟
         
       </span>
     
@@ -298,41 +293,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">网件R7000梅林固件使用frp实现群晖唤醒和远程访问</h1>
+            <h1 style="display: none">linux下使用keysmith实现icp转账</h1>
             
             
               <div class="markdown-body">
                 
-                <p>硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器<br>            群晖 DS220+<br>            有公网ip 的主机一台，这里用的腾讯云</p>
-<p>  因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。</p>
-<p>仿照前面的文章在路由器软件中心里面安装上插件 frpc ，注意frpc 稳定运行需要有虚拟内存。再买一个frps服务，我用的是腾讯云，一年50元。</p>
-<p>整个运行流程涉及到四个设备，分别是</p>
-<ol>
-<li>控制端手机，用来控制群晖启动，访问群晖数据，手机直接访问的是 frps ，在这里是这里是<br>2）腾讯云主机 ，云主机运行 frps 服务作为中转和<br>3）路由器上的frpc 客户端实现交互，frpc客户端配置的穿透服务，最终交互就是<br>4）群晖DS220+</li>
-</ol>
-<p>首先登陆腾讯云，我用的是 winserver 系统。 下载和路由器上frpc 版本对应的frps ，这个版本对应很重要。 </p>
-<p>然后就是配置 frps.ini 文件。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-attr">[common]</span><br># 设置地址及通信端口<br>bind_addr = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span><br>bind_port = <span class="hljs-number">7000</span><br><br># 监听<span class="hljs-number">7080</span>与<span class="hljs-number">7443</span>端口，进行 HTTP 与 HTTPS 代理，HTTP 与 HTTPS 端口可以成设置一样<br>vhost_http_port = <span class="hljs-number">7080</span><br>vhost_https_port = <span class="hljs-number">7443</span><br><br># 设置查看仪表板服务地址及端口，dashboard_addr 不设置，默认与 bind_addr 一样，如果不设置 dashboard_port 端口不会开启这个服务<br>dashboard_addr = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span><br>dashboard_port = <span class="hljs-number">7500</span><br><br># 设置仪表盘服务的登录的账号与密码，如果不设置就默认都是 admin<br>dashboard_user = admin<br>dashboard_pwd = xxxxxx<br> <br># 设置Token, 尽量配置复杂些，配置 frpc 会用到<br>token = xxxxxx<br></code></pre></td></tr></table></figure>
+                <p>  通过同样的一组私钥， plug 钱包和 keysmith 工具生成的地址是一样的， 本视频介绍使用keysmith来创建icp地址和转账。</p>
+<iframe src="//www.youtube.com/embed/EHzHwDN9HEs" frameborder="0" allowfullscreen=""></iframe>
 
-<p>frps 配置基本上都是一个模式，参考github上的示例修改下就可以了。注意最好这里把目录下frpc相关的所有文件都删除，只保留frps相关的文件，要不然会不小心弄混。</p>
-<p>然后就是路由器上的 frpc 配置 :</p>
-<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/001.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
-
-<p>上图中简单设置部分，服务器一栏填写腾讯云的公网ip地址。http穿透服务端口，https穿透服务端口 要和 配置文件 frps.ini 里面的 对应。frpc 用户名称随便填。</p>
-<p>穿透服务配置下面两行代表两个服务，一个是 远程唤醒服务，协议类型是 udp ，内网主机地址就是群晖的局域网ip地址（静态分配IP）。远程主机端口 要和 手机上唤醒软件的配置一致，代理名称是 MyWake ，用来把群晖远程唤醒。</p>
-<p>手机上Magic Packet配置：(注意mac地址就是群晖的mac地址，WOL 地址是云服务器地址)</p>
-<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/003.jpg" srcset="/img/loading.gif" lazyload class="" title="手机设置">
-
-<p>按照上面设置好了之后，发现一个问题，就是路由器重启之后就无法直接从远程启动群晖了。需要 <span style="color:rgb(200, 0, 0);">在局域网里面启动一次群晖之后，保持路由器不要重启，再次启动群晖的时候才可以远程启动，</span>至于原因还没找到先这样用着吧。</p>
-<p>还有一个是 远程访问服务，协议类型是 http ，代理名称是 webdav ，域名配置也要填写服务器的ip地址，如果不填写就会在手机链接的时候遇到 <code>[W] [newhttp.go:202] http: proxy error: no such domain</code> 的错误。 参考链接： <a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/wowowokao/topics/1697175">frp实现内网穿透</a> 。内网主机端口是群晖 webdav 服务的http端口 ：</p>
-<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png" srcset="/img/loading.gif" lazyload class="" title="群晖webdav配置">
-
-<p>nPlayer 访问Webdav设置：</p>
-<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/004.jpg" srcset="/img/loading.gif" lazyload class="" title="nPlayer访问Webdav设置">
-
-<p> 上图中 主机填写云服务公网ip ，用户名和密码就填写 webdav 服务的用户名和密码 ，端口就是远程主机的端口。</p>
-<p>至此就可以在手机上通过 frp + webdav 协议 访问群晖里面的音视频文件了。</p>
-<p>为什么使用webdav 协议：<br>  因为 WEBDAV 有各种音视频播放器的支持，很方便。以前想从外网播放群晖的音乐使用官方播放器界面丑陋不说，连接速度还很慢。按照网友 <a target="_blank" rel="noopener" href="https://laosu.ml/archives/page/2/">老苏的blog</a> 博客尝试过 Dim koel 等各种流媒体方案结果搭建十分麻烦，有的还要花钱，播放器还十分的小众。不如用支持 webdav 协议的播放器，用的人多，播放效果也很不错。</p>
 
                 
               </div>
@@ -351,7 +319,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="category-chain-item">系统管理</a>
+  <a href="/categories/web3%E5%BC%80%E5%8F%91/" class="category-chain-item">web3开发</a>
   
   
 
@@ -378,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网件R7000梅林固件使用frp实现群晖唤醒和远程访问</div>
-      <div>http://example.com/2022/07/24/网件R7000梅林固件使用frp实现群晖唤醒和远程访问/</div>
+      <div>linux下使用keysmith实现icp转账</div>
+      <div>http://example.com/2022/07/24/linux下使用keysmith实现icp转账/</div>
     </div>
     <div class="license-meta">
       
@@ -421,18 +389,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/24/linux%E4%B8%8B%E4%BD%BF%E7%94%A8keysmith%E5%AE%9E%E7%8E%B0icp%E8%BD%AC%E8%B4%A6/" title="linux下使用keysmith实现icp转账">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux下使用keysmith实现icp转账</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/23/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/" title="网件R7000梅林固件使用遇到的几个小问题">
-                        <span class="hidden-mobile">网件R7000梅林固件使用遇到的几个小问题</span>
+                      <a href="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/" title="网件R7000梅林固件使用frp实现群晖唤醒和远程访问">
+                        <span class="hidden-mobile">网件R7000梅林固件使用frp实现群晖唤醒和远程访问</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
