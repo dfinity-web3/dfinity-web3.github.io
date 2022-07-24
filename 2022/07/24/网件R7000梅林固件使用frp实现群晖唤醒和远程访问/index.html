@@ -16,17 +16,17 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上 frpc ，注">
+    <meta name="description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上插件 frpc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网件R7000梅林固件使用frp实现群晖唤醒和远程访问">
 <meta property="og:url" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上 frpc ，注">
+<meta property="og:description" content="硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器            群晖 DS220+            有公网ip 的主机一台，这里用的腾讯云   因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。 仿照前面的文章在路由器软件中心里面安装上插件 frpc">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/001.png">
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png">
 <meta property="article:published_time" content="2022-07-24T04:45:07.000Z">
-<meta property="article:modified_time" content="2022-07-24T08:16:59.510Z">
+<meta property="article:modified_time" content="2022-07-24T08:26:44.818Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -250,7 +250,7 @@
         
         
         
-          11 分钟
+          12 分钟
         
       </span>
     
@@ -303,8 +303,8 @@
                 
                 <p>硬件：       刷了梅林380.70_0-X7.9.1版本固件的网件R7000路由器<br>            群晖 DS220+<br>            有公网ip 的主机一台，这里用的腾讯云</p>
 <p>  因为群晖运行的时候有一些噪音，在外租房电费比较高，长期使用的电费也比较可观了。最好能设置成用到的时候远程启动，并且远程访问。这就要用到frp了。</p>
-<p>仿照前面的文章在路由器软件中心里面安装上 frpc ，注意frpc 稳定运行需要有虚拟内存。再买一个frps服务，我用的是腾讯云，一年50元。</p>
-<p>整个流程运行涉及到四个设备，分别是</p>
+<p>仿照前面的文章在路由器软件中心里面安装上插件 frpc ，注意frpc 稳定运行需要有虚拟内存。再买一个frps服务，我用的是腾讯云，一年50元。</p>
+<p>整个运行流程涉及到四个设备，分别是</p>
 <ol>
 <li>控制端手机，用来控制群晖启动，访问群晖数据，手机直接访问的是 frps ，在这里是这里是<br>2）腾讯云主机 ，云主机运行 frps 服务作为中转和<br>3）路由器上的frpc 客户端实现交互，frpc客户端配置的穿透服务，最终交互就是<br>4）群晖DS220+</li>
 </ol>
@@ -312,7 +312,7 @@
 <p>然后就是配置 frps.ini 文件。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-attr">[common]</span><br># 设置地址及通信端口<br>bind_addr = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span><br>bind_port = <span class="hljs-number">7000</span><br><br># 监听<span class="hljs-number">7080</span>与<span class="hljs-number">7443</span>端口，进行 HTTP 与 HTTPS 代理，HTTP 与 HTTPS 端口可以成设置一样<br>vhost_http_port = <span class="hljs-number">7080</span><br>vhost_https_port = <span class="hljs-number">7443</span><br><br># 设置查看仪表板服务地址及端口，dashboard_addr 不设置，默认与 bind_addr 一样，如果不设置 dashboard_port 端口不会开启这个服务<br>dashboard_addr = <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span><br>dashboard_port = <span class="hljs-number">7500</span><br><br># 设置仪表盘服务的登录的账号与密码，如果不设置就默认都是 admin<br>dashboard_user = admin<br>dashboard_pwd = xxxxxx<br> <br># 设置Token, 尽量配置复杂些，配置 frpc 会用到<br>token = xxxxxx<br></code></pre></td></tr></table></figure>
 
-<p>frps 配置基本上都是一个模式，参考github上的示例修改下就可以了。</p>
+<p>frps 配置基本上都是一个模式，参考github上的示例修改下就可以了。注意最好这里把目录下frpc相关的所有文件都删除，只保留frps相关的文件，要不然会不小心弄混。</p>
 <p>然后就是路由器上的 frpc 配置 :</p>
 <img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/001.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
