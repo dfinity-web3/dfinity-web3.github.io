@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png">
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/004.jpg">
 <meta property="article:published_time" content="2022-07-24T04:45:07.000Z">
-<meta property="article:modified_time" content="2022-07-24T10:22:59.404Z">
+<meta property="article:modified_time" content="2022-07-24T10:31:53.824Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -323,7 +323,7 @@
 <p>手机上Magic Packet配置：(注意mac地址就是群晖的mac地址，WOL 地址是云服务器地址)</p>
 <img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/003.jpg" srcset="/img/loading.gif" lazyload class="" title="手机设置">
 
-<p>按照上面设置好了之后，发现一个问题，就是路由器重启之后就无法直接从远程启动群晖了。需要 <span style="color:rgb(200, 0, 0);">在局域网里面启动一次群晖之后，保持路由器不要重启，再次启动群晖的时候才可以远程启动，</span>至于原因还没找到（arp 绑定设备也做了）先这样用着吧，好在R7000稳如老狗，搭配上UPS可以做到常年不用重启了。</p>
+<p>按照上面设置好了之后，发现一个问题，就是路由器重启之后就无法直接从远程启动群晖了。需要 <span style="color:rgb(200, 0, 0);">在局域网里面启动一次群晖之后，保持路由器不要重启，再次启动群晖的时候才可以远程启动，</span>至于原因还没找到（arp 绑定设备也做了）先这样用着吧，好在R7000稳如老狗，搭配上UPS应该可以做到常年不用重启了。</p>
 <p>还有一个是 远程访问服务，协议类型是 http ，代理名称是 webdav ，域名配置也要填写服务器的ip地址，如果不填写就会在手机链接的时候遇到 <code>[W] [newhttp.go:202] http: proxy error: no such domain</code> 的错误。 参考链接： <a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/wowowokao/topics/1697175">frp实现内网穿透</a> 。内网主机端口是群晖 webdav 服务的http端口 ：</p>
 <img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png" srcset="/img/loading.gif" lazyload class="" title="群晖webdav配置">
 
