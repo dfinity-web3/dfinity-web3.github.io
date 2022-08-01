@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>JS输出函数调用栈</title>
+    <link href="/2022/08/01/JS%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/"/>
+    <url>/2022/08/01/JS%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/</url>
+    
+    <content type="html"><![CDATA[<p>最近看一个前端小游戏，需要获取当前代码执行时所在的位置（从哪个函数调用过来的，一层层向上回溯），方便代码定位，于是就总结下 JavaScript 如何输出函数调用栈。</p><p>先看一个hello world 程序:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) &#123;<br><span class="hljs-keyword">let</span> a = <span class="hljs-title function_">fun</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fun</span>(<span class="hljs-params">a</span>) &#123;<br><span class="hljs-keyword">return</span> a<br>&#125;<br><br><span class="hljs-title function_">main</span>()<br></code></pre></td></tr></table></figure><p>上面 main 函数调用了fun 函数， 使用 <code>console.trace() </code> 跟踪函数调用栈 。(经过测试 trace 加不加参数 ‘fun’ 结果都是一样的)</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) &#123;<br><span class="hljs-keyword">let</span> a = <span class="hljs-title function_">fun</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fun</span>(<span class="hljs-params">a</span>) &#123;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">trace</span>(<span class="hljs-string">&#x27;fun&#x27;</span>)<br><span class="hljs-keyword">return</span> a<br>&#125;<br><br><span class="hljs-title function_">main</span>()<br></code></pre></td></tr></table></figure><p>输出结果如下：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css">Trace: fun<br>    at fun (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">7</span>:<span class="hljs-number">10</span>)<br>    at main (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">2</span>:<span class="hljs-number">10</span>)<br>    at Object.&lt;anonymous&gt; (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">11</span>:<span class="hljs-number">1</span>)<br>    at Module._compile (internal/modules/cjs/loader.js:<span class="hljs-number">778</span>:<span class="hljs-number">30</span>)<br>    at Object.Module._extensions..js (internal/modules/cjs/loader.js:<span class="hljs-number">789</span>:<span class="hljs-number">10</span>)<br>    at Module.load (internal/modules/cjs/loader.js:<span class="hljs-number">653</span>:<span class="hljs-number">32</span>)<br>    at tryModuleLoad (internal/modules/cjs/loader.js:<span class="hljs-number">593</span>:<span class="hljs-number">12</span>)<br>    at Function.Module._load (internal/modules/cjs/loader.js:<span class="hljs-number">585</span>:<span class="hljs-number">3</span>)<br>    at Function.Module.runMain (internal/modules/cjs/loader.js:<span class="hljs-number">831</span>:<span class="hljs-number">12</span>)<br>    at startup (internal/bootstrap/node.js:<span class="hljs-number">283</span>:<span class="hljs-number">19</span>)<br>hello world<br></code></pre></td></tr></table></figure><p>参考链接：<br><a href="https://juejin.cn/post/7019108610332426248">JS输出函数调用栈</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>转载</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>linux下使用keysmith实现icp转账</title>
     <link href="/2022/07/24/linux%E4%B8%8B%E4%BD%BF%E7%94%A8keysmith%E5%AE%9E%E7%8E%B0icp%E8%BD%AC%E8%B4%A6/"/>
     <url>/2022/07/24/linux%E4%B8%8B%E4%BD%BF%E7%94%A8keysmith%E5%AE%9E%E7%8E%B0icp%E8%BD%AC%E8%B4%A6/</url>
