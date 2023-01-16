@@ -27,8 +27,10 @@
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/003.jpg">
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/002.png">
 <meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/004.jpg">
+<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/005.png">
+<meta property="og:image" content="http://example.com/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/006.jpg">
 <meta property="article:published_time" content="2022-07-24T04:45:07.000Z">
-<meta property="article:modified_time" content="2023-01-16T13:47:20.722Z">
+<meta property="article:modified_time" content="2023-01-16T14:20:33.264Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.1k 字
         
       </span>
     
@@ -252,7 +254,7 @@
         
         
         
-          15 分钟
+          18 分钟
         
       </span>
     
@@ -335,7 +337,13 @@
 <p>为什么使用webdav 协议：<br>  因为 WEBDAV 有各种音视频播放器的支持，很方便。以前想从外网播放群晖的音乐使用官方播放器界面丑陋不说，连接速度还很慢。按照网友 <a target="_blank" rel="noopener" href="https://laosu.ml/archives/page/2/">老苏的blog</a> 博客尝试过 Dim koel 等各种流媒体方案结果搭建十分麻烦，有的还要花钱，播放器还十分的小众。不如用支持 webdav 协议的播放器，用的人多，播放效果也很不错。</p>
 <p>PC主机的远程唤醒和远程控制和这个原理差不多，仿照这个弄就可以了，这里就不写了。</p>
 <hr>
-<p>2023年2月4号更新:</p>
+<p>2023年2月4号更新:<br>  经过一段时间的使用发现， frp 转发 Magic Packet 开机包很不稳定（或许问题在其它环节）。有时候可以唤醒有时候就无法唤醒。<br>无奈只能想另外的方案。<br>  考虑到梅林固件本身其实也有唤醒功能的，而且梅林设备一直在线，可以用 frp 配置 远程登陆梅林固件，然后再操作梅林固件来唤醒同一个局域网段的其他设备。</p>
+<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/005.png" srcset="/img/loading.gif" lazyload class="" title="远程控制梅林设置">
+<p>  通过上面的设置，就可以保证远程登陆梅林固件了，然后再在梅林里面设置 其他设备唤醒的方式</p>
+<img src="/2022/07/24/%E7%BD%91%E4%BB%B6R7000%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E4%BD%BF%E7%94%A8frp%E5%AE%9E%E7%8E%B0%E7%BE%A4%E6%99%96%E5%94%A4%E9%86%92%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/006.jpg" srcset="/img/loading.gif" lazyload class="" title="梅林唤醒局域网设备">
+
+
+<p>这种唤醒方式和上面的唤醒方式不同的地方在于，这里的唤醒包是梅林发出的，在局域网内部直接给目标设备，这个唤醒过程是很稳定的。<br>上面的方式 唤醒包是通过手持终端发出的，经过 vps 到达梅林，再由梅林转发给目标设备，这个过程很不稳定，经常唤醒失败！</p>
 
                 
               </div>
