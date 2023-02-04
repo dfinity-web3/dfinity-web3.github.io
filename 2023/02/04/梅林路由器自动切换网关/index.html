@@ -16,22 +16,27 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="最近看一个前端小游戏，需要获取当前代码执行时所在的位置（从哪个函数调用过来的，一层层向上回溯），方便代码定位，于是就总结下 JavaScript 如何输出函数调用栈。 先看一个hello world 程序: 12345678910function main() &amp;#123;	let a &#x3D; fun(&amp;#x27;hello world&amp;#x27;)	console.log(a)&amp;#125;funct">
+    <meta name="description" content="经过一段时间梅林 clash 插件的使用，感觉到不稳定和速度慢，只能转向软路由，一顿研究后终于选择openwrt。用梅林作主路由，openwrt作为旁路由。网络拓扑结果如下所示：      主路由梅林特点是稳定，功耗低，有24小时开机的需求和条件，用来提供无线接入和基本的插件功能 – frp,通过 frp 控制梅林来启动其他设备。  旁路由是在群晖上创建一个虚拟机安装的，x86架构的open">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS输出函数调用栈">
-<meta property="og:url" content="http://example.com/2022/08/01/JS%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/index.html">
+<meta property="og:title" content="梅林路由器自动切换网关">
+<meta property="og:url" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="最近看一个前端小游戏，需要获取当前代码执行时所在的位置（从哪个函数调用过来的，一层层向上回溯），方便代码定位，于是就总结下 JavaScript 如何输出函数调用栈。 先看一个hello world 程序: 12345678910function main() &amp;#123;	let a &#x3D; fun(&amp;#x27;hello world&amp;#x27;)	console.log(a)&amp;#125;funct">
+<meta property="og:description" content="经过一段时间梅林 clash 插件的使用，感觉到不稳定和速度慢，只能转向软路由，一顿研究后终于选择openwrt。用梅林作主路由，openwrt作为旁路由。网络拓扑结果如下所示：      主路由梅林特点是稳定，功耗低，有24小时开机的需求和条件，用来提供无线接入和基本的插件功能 – frp,通过 frp 控制梅林来启动其他设备。  旁路由是在群晖上创建一个虚拟机安装的，x86架构的open">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-01T13:32:52.000Z">
-<meta property="article:modified_time" content="2022-08-01T13:48:52.185Z">
+<meta property="og:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/001.jpg">
+<meta property="og:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/002.jpg">
+<meta property="og:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/003.jpg">
+<meta property="og:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/004.jpg">
+<meta property="og:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/005.jpg">
+<meta property="article:published_time" content="2023-02-04T09:55:54.000Z">
+<meta property="article:modified_time" content="2023-02-04T10:56:42.291Z">
 <meta property="article:author" content="xianjianxsc">
-<meta property="article:tag" content="转载">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/001.jpg">
   
   
   
-  <title>JS输出函数调用栈 - 黑暗中的矩阵</title>
+  <title>梅林路由器自动切换网关 - 黑暗中的矩阵</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="JS输出函数调用栈"></span>
+            <span id="subtitle" data-typed-text="梅林路由器自动切换网关"></span>
           
         </div>
 
@@ -224,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-01 16:32" pubdate>
-          2022年8月1日 下午
+        <time datetime="2023-02-04 11:55" pubdate>
+          2023年2月4日 中午
         </time>
       </span>
     
@@ -236,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          2.8k 字
         
       </span>
     
@@ -247,7 +252,7 @@
         
         
         
-          9 分钟
+          24 分钟
         
       </span>
     
@@ -293,23 +298,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JS输出函数调用栈</h1>
+            <h1 style="display: none">梅林路由器自动切换网关</h1>
             
             
               <div class="markdown-body">
                 
-                <p>最近看一个前端小游戏，需要获取当前代码执行时所在的位置（从哪个函数调用过来的，一层层向上回溯），方便代码定位，于是就总结下 JavaScript 如何输出函数调用栈。</p>
-<p>先看一个hello world 程序:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">let</span> a = <span class="hljs-title function_">fun</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fun</span>(<span class="hljs-params">a</span>) &#123;<br>	<span class="hljs-keyword">return</span> a<br>&#125;<br><br><span class="hljs-title function_">main</span>()<br></code></pre></td></tr></table></figure>
-
-<p>上面 main 函数调用了fun 函数， 使用 <code>console.trace() </code> 跟踪函数调用栈 。(经过测试 trace 加不加参数 ‘fun’ 结果都是一样的)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">let</span> a = <span class="hljs-title function_">fun</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fun</span>(<span class="hljs-params">a</span>) &#123;<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">trace</span>(<span class="hljs-string">&#x27;fun&#x27;</span>)<br>	<span class="hljs-keyword">return</span> a<br>&#125;<br><br><span class="hljs-title function_">main</span>()<br></code></pre></td></tr></table></figure>
-
-<p>输出结果如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css">Trace: fun<br>    at fun (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">7</span>:<span class="hljs-number">10</span>)<br>    at main (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">2</span>:<span class="hljs-number">10</span>)<br>    at Object.&lt;anonymous&gt; (/home/mat/work/<span class="hljs-number">1</span>.js:<span class="hljs-number">11</span>:<span class="hljs-number">1</span>)<br>    at Module._compile (internal/modules/cjs/loader.js:<span class="hljs-number">778</span>:<span class="hljs-number">30</span>)<br>    at Object.Module._extensions..js (internal/modules/cjs/loader.js:<span class="hljs-number">789</span>:<span class="hljs-number">10</span>)<br>    at Module.load (internal/modules/cjs/loader.js:<span class="hljs-number">653</span>:<span class="hljs-number">32</span>)<br>    at tryModuleLoad (internal/modules/cjs/loader.js:<span class="hljs-number">593</span>:<span class="hljs-number">12</span>)<br>    at Function.Module._load (internal/modules/cjs/loader.js:<span class="hljs-number">585</span>:<span class="hljs-number">3</span>)<br>    at Function.Module.runMain (internal/modules/cjs/loader.js:<span class="hljs-number">831</span>:<span class="hljs-number">12</span>)<br>    at startup (internal/bootstrap/node.js:<span class="hljs-number">283</span>:<span class="hljs-number">19</span>)<br>hello world<br></code></pre></td></tr></table></figure>
+                <p>   经过一段时间梅林 clash 插件的使用，感觉到不稳定和速度慢，只能转向软路由，一顿研究后终于选择openwrt。<br>用梅林作主路由，openwrt作为旁路由。网络拓扑结果如下所示：</p>
+<img src="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/001.jpg" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
 
-<p>参考链接：<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7019108610332426248">JS输出函数调用栈</a></p>
+<p>  主路由梅林特点是稳定，功耗低，有24小时开机的需求和条件，用来提供无线接入和基本的插件功能 – frp,通过 frp 控制梅林来启动其他设备。<br>  旁路由是在群晖上创建一个虚拟机安装的，x86架构的openwrt 功能十分强大，可以轻松的实现穿墙和去广告 （以后还会使用到更多的功能）。<br>主旁路由配合工作需要各自设备上有对应的设置，旁路由配置如下(局域网上所有设备都经过旁路由)：</p>
+<img src="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/002.jpg" srcset="/img/loading.gif" lazyload class="" title="网络 -&gt; 接口 -&gt; LAN 基本设置">
+
+<img src="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/003.jpg" srcset="/img/loading.gif" lazyload class="" title="网络 -&gt; 接口 -&gt; LAN 高级设置">
+<p> 主路由设置需要分两种情况，一种是旁路由开启的时候设置如下(局域网上所有设备都经过旁路由):</p>
+ <img src="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/004.jpg" srcset="/img/loading.gif" lazyload class="" title="内部网络 -&gt; DHCP服务器">
+
+<p>还有一种是旁路由关闭的时候，主路由自己也能提供基本的上网功能，配置如下：</p>
+ <img src="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/005.jpg" srcset="/img/loading.gif" lazyload class="" title="内部网络 -&gt; DHCP服务器">
+
+<p>  这样就有一个问题，因为旁路由有时候开启有时候关闭，如果手动修改主路由设置会非常麻烦，应该在主路由上放一个脚本自动检测旁路由是否在线，并设置成相应的模式。</p>
+<p>参考文章: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/341954106">merlin-梅林路由器自动切换网关</a></p>
+<p>切换网关的脚本 auto_switch_gateway.sh 如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs css">#!/bin/sh<br><br>default_gateway=&#x27;<span class="hljs-number">192.168</span>.<span class="hljs-number">50.1</span>&#x27;<br>auxiliary_gateway=&#x27;<span class="hljs-number">192.168</span>.<span class="hljs-number">50.35</span>&#x27;<br><br>#公共 DNS网关<br>up_gateway=&#x27;<span class="hljs-number">114.114</span>.<span class="hljs-number">114.114</span>&#x27;<br><br>check_ip_available()&#123;<br>    ping -c <span class="hljs-number">3</span> $<span class="hljs-number">1</span> | grep packets | awk &#x27;&#123;print $<span class="hljs-number">4</span>&#125;&#x27;<br>&#125;<br><br># If the gateway of the up close, the network is completely unusable<br><br>res=`check_ip_available $up_gateway`<br>echo $res<br>if <span class="hljs-selector-attr">[ $((res)) -eq 0 ]</span>; then<br>  echo &quot;up_gateway unusable&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>  exit <span class="hljs-number">1</span><br>fi<br><br><br>cur_gateway=`/usr/sbin/nvram get dhcp_gateway_x` # get current gateway<br><br><br>if <span class="hljs-selector-attr">[ <span class="hljs-string">&quot;$cur_gateway&quot;</span> = <span class="hljs-string">&quot;$default_gateway&quot;</span> ]</span>; then<br>   echo &quot;cur is default_gateway&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>   res=`check_ip_available $auxiliary_gateway`<br>   if <span class="hljs-selector-attr">[ $(($res)) -eq 0 ]</span>; then<br>      echo &quot;auxiliary_gateway is not available,do nothing!d-exit&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>      exit <span class="hljs-number">1</span><br>   fi<br>   #如果当前设置的是主路由，并且旁路由开启了则切换到旁路由<br>   echo &quot;auxiliary_gateway is available,switch <span class="hljs-selector-tag">to</span> auxiliary&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>   # <span class="hljs-selector-tag">to</span> switch<br>   /usr/sbin/nvram set dhcp_gateway_x=$auxiliary_gateway<br>   /usr/sbin/nvram set dhcp_dns1_x=$auxiliary_gateway<br>   /usr/sbin/nvram set dhcp_dns2_x=&quot;&quot;<br>   /usr/sbin/nvram commit<br><br>   /sbin/rc rc_service restart_net_and_phy<br>   exit <span class="hljs-number">0</span><br>fi<br><br><br>if <span class="hljs-selector-attr">[ <span class="hljs-string">&quot;$cur_gateway&quot;</span> = <span class="hljs-string">&quot;$auxiliary_gateway&quot;</span> ]</span>; then<br>   echo &quot;cur is auxiliary_gateway&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>   res=`check_ip_available $auxiliary_gateway`<br>   if <span class="hljs-selector-attr">[ $(($res)) -gt 0 ]</span>; then<br>      echo &quot;auxiliary_gateway is available,do nothing! <span class="hljs-selector-tag">a</span>-exit&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>      exit <span class="hljs-number">1</span><br>   fi<br>   #如果当前设置的是旁路由，但是旁路由关闭了，则切换回主路由<br>   echo &quot;auxiliary_gateway is not available,switch <span class="hljs-selector-tag">to</span> default&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br>   # <span class="hljs-selector-tag">to</span> switch<br>   /usr/sbin/nvram set dhcp_gateway_x=$default_gateway<br>   /usr/sbin/nvram set dhcp_dns1_x=<span class="hljs-number">119.29</span>.<span class="hljs-number">29.29</span><br>   /usr/sbin/nvram set dhcp_dns2_x=<span class="hljs-number">223.5</span>.<span class="hljs-number">5.5</span><br>   /usr/sbin/nvram commit<br><br>   /sbin/rc rc_service restart_net_and_phy<br>   exit <span class="hljs-number">0</span><br>fi<br><br>echo &quot;nothing change&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/log/auto_switch_gateway<span class="hljs-selector-class">.log</span><br></code></pre></td></tr></table></figure>
+
+
+<p>   &#x2F;sbin&#x2F;rc rc_service restart_net_and_phy，这句命令，其实就是路由器修改本地网关后，会触发的命令。相当于手动执行应用本页面设置。</p>
+<p>  另外原参考文章还用到了 init-start 脚本和 create_crontab_auto_switch_gateway.sh 脚本来实现复杂的定时调用，这里就不那么复杂了，<br>直接在主路由启动之后执行如下命令即可(主路由很久不会重启一次):</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">echo &quot;* * * * * /bin/sh /jffs/scripts/auto_switch_gateway<span class="hljs-selector-class">.sh</span>&quot; &gt;&gt; /<span class="hljs-selector-tag">var</span>/spool/cron/crontabs/admin<br></code></pre></td></tr></table></figure>
+
+
 
                 
               </div>
@@ -318,34 +336,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
-      
-    </div>
   
 </div>
 
@@ -355,8 +345,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>JS输出函数调用栈</div>
-      <div>http://example.com/2022/08/01/JS输出函数调用栈/</div>
+      <div>梅林路由器自动切换网关</div>
+      <div>http://example.com/2023/02/04/梅林路由器自动切换网关/</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +358,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年8月1日</div>
+          <div>2023年2月4日</div>
         </div>
       
       
@@ -398,18 +388,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/04/%E6%A2%85%E6%9E%97%E8%B7%AF%E7%94%B1%E5%99%A8%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E5%85%B3/" title="梅林路由器自动切换网关">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">梅林路由器自动切换网关</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/24/linux%E4%B8%8B%E4%BD%BF%E7%94%A8keysmith%E5%AE%9E%E7%8E%B0icp%E8%BD%AC%E8%B4%A6/" title="linux下使用keysmith实现icp转账">
-                        <span class="hidden-mobile">linux下使用keysmith实现icp转账</span>
+                      <a href="/2022/08/01/JS%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" title="JS输出函数调用栈">
+                        <span class="hidden-mobile">JS输出函数调用栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
