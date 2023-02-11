@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xianjianxsc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="尝试了很多次群晖的下载youtube视频的docker，无奈各种原因总是配置不成功。只能自己在docker里面搭建 python 和ffmpeg环境。  Ubuntu 22.04 里面已经安装 python3 了，不过pip3没有安装，需要手动安装。 1apt-get install python3-pip  tips: 给docker共享文件夹：   拷贝过去文件 ytube.py : 1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用python脚本下载 youtube 视频">
+<meta property="og:url" content="http://example.com/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/index.html">
+<meta property="og:site_name" content="黑暗中的矩阵">
+<meta property="og:description" content="尝试了很多次群晖的下载youtube视频的docker，无奈各种原因总是配置不成功。只能自己在docker里面搭建 python 和ffmpeg环境。  Ubuntu 22.04 里面已经安装 python3 了，不过pip3没有安装，需要手动安装。 1apt-get install python3-pip  tips: 给docker共享文件夹：   拷贝过去文件 ytube.py : 1234">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/001.jpg">
+<meta property="article:published_time" content="2023-02-11T07:39:22.000Z">
+<meta property="article:modified_time" content="2023-02-11T08:19:45.292Z">
+<meta property="article:author" content="xianjianxsc">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/001.jpg">
+  
+  
+  
+  <title>使用python脚本下载 youtube 视频 - 黑暗中的矩阵</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DXLh0flgz9KQ47fT6oqTRXrf-MdYXbMMI","app_key":"ae1NWqRyOtfgAzIYCSdNDnGG","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xianjianxsc 的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用python脚本下载 youtube 视频"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-11 15:39" pubdate>
+          2023年2月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用python脚本下载 youtube 视频</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <pre><code class="hljs">尝试了很多次群晖的下载youtube视频的docker，无奈各种原因总是配置不成功。只能自己在docker里面搭建 python 和ffmpeg环境。
+</code></pre>
+<p>Ubuntu 22.04 里面已经安装 python3 了，不过pip3没有安装，需要手动安装。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install python3-pip<br></code></pre></td></tr></table></figure>
+
+<p>tips: 给docker共享文件夹：</p>
+<img src="/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/001.jpg" srcset="/img/loading.gif" lazyload class="" title="docker存储空间设置">
+
+<p>拷贝过去文件 ytube.py :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> pytube <span class="hljs-keyword">import</span> YouTube<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">import</span> re<br><span class="hljs-comment">#from pywebio.input import *</span><br><br>temp_video = <span class="hljs-string">&quot;&quot;</span><br>temp_audio = <span class="hljs-string">&quot;&quot;</span><br>base_dir = <span class="hljs-string">&#x27;/home/share&#x27;</span><br><br>proxy_handler = &#123;<br><span class="hljs-string">&quot;http&quot;</span>: <span class="hljs-string">&quot;http://192.168.50.35:7890&quot;</span>,<br><span class="hljs-string">&quot;https&quot;</span>: <span class="hljs-string">&quot;http://192.168.50.35:7890&quot;</span>,<br><span class="hljs-string">&quot;socks5&quot;</span>:<span class="hljs-string">&quot;socks5://192.168.50.35:7891&quot;</span><br>&#125;<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">onComplete</span>(<span class="hljs-params">stream, file_path</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;onComplete:   &#x27;</span> + file_path)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">onProgress</span>(<span class="hljs-params">stream, chunk, remains</span>):<br>    total = stream.filesize<br>    percent = (total-remains) / total * <span class="hljs-number">100</span><br>    <span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;  &#123;:05.2f&#125;%&#x27;</span>.<span class="hljs-built_in">format</span>(percent)  )<br>    <span class="hljs-comment">#print (&#x27;下載中… &#123;:05.2f&#125;%&#x27;.format(percent), end=&#x27;\r&#x27; )</span><br>    <span class="hljs-keyword">return</span> <br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">download_media</span>(<span class="hljs-params">url</span>):<br>    <span class="hljs-keyword">try</span>:<br>        yt = YouTube(url, proxies=proxy_handler, on_progress_callback=onProgress,on_complete_callback=onComplete)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;下載影片時發生錯誤，請確認網路連線和YouTube網址無誤。&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-comment">#filter = yt.streams.filter</span><br><br>    <span class="hljs-keyword">global</span> temp_video,temp_audio<br>    temp_video = os.path.join(base_dir, <span class="hljs-string">&#x27;video_out.mp4&#x27;</span>)<br>    temp_audio = os.path.join(base_dir, <span class="hljs-string">&#x27;audio_out.mp4&#x27;</span>)<br><br>    <span class="hljs-built_in">print</span>(temp_video)<br>    <span class="hljs-built_in">print</span>(temp_audio)<br>    <br>    count = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> count &lt;= <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment">#download audio only</span><br>            yt.streams.<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;audio&quot;</span>,abr=<span class="hljs-string">&quot;128kbps&quot;</span>).first().download(filename=temp_audio)<br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">except</span>:<br>            count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">5</span>:<br>            <span class="hljs-keyword">continue</span><br>    <span class="hljs-comment">#download video only</span><br>    video_strem = yt.streams.<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;video&quot;</span>, res=<span class="hljs-string">&quot;1080p&quot;</span>).first()<br>    <span class="hljs-keyword">if</span> video_strem <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        video_strem = yt.streams.<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;video&quot;</span>, res=<span class="hljs-string">&quot;720p&quot;</span>).first()<br>    <span class="hljs-keyword">if</span> video_strem <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        video_strem = yt.streams.<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;video&quot;</span>, res=<span class="hljs-string">&quot;480p&quot;</span>).first()<br>    count = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> count &lt;= <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">try</span>:<br>            video_strem.download(filename=temp_video)<br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">except</span>:<br>            count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">5</span>:<br>            <span class="hljs-keyword">continue</span><br><br>    ori_name = yt.title<br>    <span class="hljs-comment">#ori_name = re.sub(r&#x27;[.,&quot;\&#x27;-?:!;]&#x27;, &#x27;&#x27;, ori_name)</span><br>    merge_media(ori_name + <span class="hljs-string">&quot;.mp4&quot;</span>)<br>    os.remove(temp_audio)<br>    os.remove(temp_video)<br><br>    <span class="hljs-comment">## 把音频和视频合并起来成一个文件，如果像下面一样用 ffmpeg 的 python 接口，则导致耗时很长，</span><br>    <span class="hljs-comment">## 长达 ffmpeg命令方式 的几十倍，可能它们的实现方式不一样，这里不深究了。</span><br>    <span class="hljs-comment"># import ffmpeg</span><br>    <span class="hljs-comment"># video = ffmpeg.input(&quot;video.mp4&quot;)</span><br>    <span class="hljs-comment"># audio = ffmpeg.input(&quot;audio.mp4&quot;)</span><br>    <span class="hljs-comment"># ffmpeg.output(audio, video, &quot;finished_video.mp4&quot;).run(overwrite_output=True)</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">merge_media</span>(<span class="hljs-params">out_name</span>):<br>    <span class="hljs-keyword">global</span> temp_video,temp_audio<br>    temp_output = os.path.join(base_dir, out_name)<br>    <span class="hljs-built_in">print</span>(temp_output)<br>    cmd = <span class="hljs-string">f&#x27;ffmpeg -i <span class="hljs-subst">&#123;temp_video&#125;</span> -i <span class="hljs-subst">&#123;temp_audio&#125;</span>  -map 0:v -map 1:a   -c copy -y \&#x27;<span class="hljs-subst">&#123;temp_output&#125;</span>\&#x27;&#x27;</span><br>    <span class="hljs-keyword">try</span>:<br>        subprocess.run(cmd, shell=<span class="hljs-literal">True</span>)<br>        <span class="hljs-comment"># 視訊檔重新命名</span><br>        <span class="hljs-comment">#os.remove(&#x27;./audio_out.mp4&#x27;)</span><br>        <span class="hljs-comment">#os.remove(&#x27;./video_out.mp4&#x27;)</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;音视频合并完成&#x27;</span>)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;音视频合并失败&#x27;</span>)<br>    <span class="hljs-keyword">return</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./src.txt&quot;</span>, mode=<span class="hljs-string">&#x27;r&#x27;</span>,encoding=<span class="hljs-string">&#x27;UTF-8&#x27;</span>)<br>    lines = file.readlines()<br>    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>        download_media(line)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>创建一个空文件src.txt ,把需要下载的ytube视频链接放在这个txt里面。</p>
+<p>给ubuntu 安装 ffmpeg 以供转码需要，</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install ffmpeg<br></code></pre></td></tr></table></figure>
+
+<p>  代码说明：<br>1)一般下载工具1080p是没有音频的，720p及以下才有音频，这是由youtube的DASH Streams 特性决定的。这里把1080p视频 和音频合并，所以要比大多数下载工具要好一些。<br>2)对于音频流选择 mp4a.xxx 而不是 opus ，方便后面合并音视频，<br>3)合并音视频 选择 ffmpeg 命令方式而不是用 ffmpeg.input ffmpeg.output方法，那样会用很长时间，cpu占用率也很高，具体原因就不研究了。<br>4)proxy_handler 是代理设置，这里用的是软路由的地址。需要根据自己情况修改。</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://swf.com.tw/?p=1402">YouTube影片下載（五）：PyTube3程式庫更新說明</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e18cdb1053d0">python下载youtube视频</a><br><a target="_blank" rel="noopener" href="https://haibei.online/posts/3728898916#github%E5%9C%B0%E5%9D%80">pytube，下载YouTube视频无压力</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用python脚本下载 youtube 视频</div>
+      <div>http://example.com/2023/02/11/使用python脚本下载-youtube-视频/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xianjianxsc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月11日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/11/win10%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="win10小技巧">
+                        <span class="hidden-mobile">win10小技巧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"DXLh0flgz9KQ47fT6oqTRXrf-MdYXbMMI","appKey":"ae1NWqRyOtfgAzIYCSdNDnGG","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
