@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>群晖NAS使用Docker安装gitlab服务器</title>
+    <link href="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <url>/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<p>  有时候需要搭建自己的 git 服务器，因为1)项目比较大，如果用github 同步很耗费时间。  2)不想让别人看到自己的代码。  多方研究选择了gitlab 。</p><p>群晖其实自带一个叫 Git Server 的套件，不过没有图形界面，而且还要开放ssh端口（ssh端口开放容易被攻击），配置很繁杂，不建议使用，建议使用Docker配合gitlab-ce来搭建。</p><p>  我看有的教程推荐用中文版的 gitlab-ce-zh 亲测用这个启动docker老是失败，找不到原因，换成英文版的就行了。</p><p>  Gitlab依赖很多，启动速度很慢，而且比较耗资源，如果NAS的配置较差的话，建议不要安装了。</p>  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/001.jpg" class="" title="资源占用"><p>下载Gitlab镜像<br>  首先打开 Docker 套件，搜索 gitlab-ce，然后双击安装，选择 latest 最新版，现在映像已经到3个G了需要等好一会才能下载完。</p>  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002.jpg" class="">  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002-1.jpg" class=""><p>配置并启动Gitlab容器<br>   首先需要把相关目录建立起来，参考文档配置，本地设置根目录配置为&#x2F;docker&#x2F;gitlab，新建目录</p><p>配置路径映射</p><p>本地路径              容器路径           说明<br>&#x2F;docker&#x2F;gitlab&#x2F;data    &#x2F;var&#x2F;opt&#x2F;gitlab     数据目录<br>&#x2F;docker&#x2F;gitlab&#x2F;logs    &#x2F;var&#x2F;log&#x2F;gitlab     日志目录<br>&#x2F;docker&#x2F;gitlab&#x2F;config&#x2F;etc&#x2F;gitlab         配置文件等</p>  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/003.jpg" class=""><p>配置端口映射，其他端口可以不改变，配置一个需要使用的web端端口。</p>  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/004.jpg" class=""><p>Gitlab启动速度很慢，需要耐心等待。</p><p>  配置启动好之后，可以通过 <a href="http://nas_ip_or_domain:5080/">http://nas_ip_or_domain:5080/</a>  来访问。</p><p>启动慢访问可能是404（直接无法访问），稍后可以得到502页面，再等等就好了。</p><p>启动完成后得到登录页面：</p><p>账号：root</p><p>密码：是docker生成的可以参考 <a href="https://blog.csdn.net/cirea1987/article/details/120178421">docker gitlab 初始密码查看</a>  来获取，登录之后修改密码。</p>  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/005.jpg" class="">  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/006.jpg" class=""><p>然后就可以 使用 git 了，创建project,提交代码， 第一次提交的时候要输入用户名和密码。</p><p>  如果还想了解更多的使用方式可以参考如下文章 使用邮箱功能，这里因为是给自己使用的就不配置了。<br><a href="https://fugary.com/?p=304">群晖NAS搭建私有Gitlab仓库</a><br><a href="https://github.com/shaobeichen/blog/issues/11">Gitlab强制推送提示”You are not allowed to force push code to a protected branch on this project</a><br><a href="https://www.weizhiyong.com/archives/1604">群晖使用Docker安装并配置GitLab服务器</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>系统管理</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>整理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用python脚本下载 youtube 视频</title>
     <link href="/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/"/>
     <url>/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/</url>
