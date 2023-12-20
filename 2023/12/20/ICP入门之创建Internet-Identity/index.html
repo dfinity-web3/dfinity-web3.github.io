@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png">
 <meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png">
 <meta property="article:published_time" content="2023-12-20T09:20:48.000Z">
-<meta property="article:modified_time" content="2023-12-20T14:45:43.464Z">
+<meta property="article:modified_time" content="2023-12-20T15:16:06.591Z">
 <meta property="article:author" content="xianjianxsc">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png">
@@ -314,7 +314,7 @@
 </li>
 <li><p>弹出一个对话框提示设置 安全密钥<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/002.png" srcset="/img/loading.gif" lazyload class=""><br>这里插入USB安全密钥 Yunbikey, 并手动选择<br> 参考:  <a target="_blank" rel="noopener" href="https://developers.google.com/codelabs/webauthn-2fa-key#0">使用安全密钥 (WebAuthn) 进行双重身份验证</a><br>ii 身份所使用的 WebAuthn 是安全密钥最基础的功能,几乎无需配置，在 Firefox 和 Chrome 上均能够做到开箱即用</p>
 </li>
-<li><p>输入安全密钥的 PIN:<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png" srcset="/img/loading.gif" lazyload class=""><br> 至此就成功创建了一个 lnternet ldentlty，并给出用户编号<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png" srcset="/img/loading.gif" lazyload class=""></p>
+<li><p>输入安全密钥的 PIN:<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png" srcset="/img/loading.gif" lazyload class=""><br> 至此就成功创建了一个 lnternet ldentlty，并得到了用户编号<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png" srcset="/img/loading.gif" lazyload class=""></p>
 </li>
 </ol>
 <p>前面使用 YubiKey 在 Internet Identity 上进行 WebAuthn 注册时，YubiKey 会自动为其生成一个独立的密钥对（公钥和私钥）。将公钥发送到网站，私钥则安全地存储在 YubiKey 内部。这个过程对用户是透明的，不需要用户直接干预。YubiKey 设计有足够的存储空间来保存数百甚至更多的这样的密钥对。</p>
@@ -322,6 +322,8 @@
 <p>这样在保证安全性的同时也带来了一个问题，那就是存储 安全密钥 的硬件本体的丢失意味着将永远无法完成验证，为了解决这个问题 Internet Identity 提供了多种备份方法，这里单独介绍其助记词方式：</p>
 <p>第一次登录的时候会有个引导页面, 提示创建 Recovery Phrase<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/005.png" srcset="/img/loading.gif" lazyload class=""><br>点击创建之后会给出 24 个助记词 和 用户编号.<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/006.png" srcset="/img/loading.gif" lazyload class=""><br> 对于24个助记词必须要做到:<br>1)只能自己知道，不可泄露给别人，否则别人就可以通过助记词取走资产<br>2)助记词不能丢失，否则安全密钥丢失就没有办法恢复了，资产也就丢失。</p>
 <p>当丢失安全密钥的时候（比如说 YubiKey丢失），就在登录页面点击 Lost access ，然后选择 Use recovery phrase 即可<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png" srcset="/img/loading.gif" lazyload class=""><br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png" srcset="/img/loading.gif" lazyload class=""></p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lk2684753/article/details/118224251">Dfinity(ICP)身份认证和账本快速入门-3</a></p>
 
                 
               </div>
