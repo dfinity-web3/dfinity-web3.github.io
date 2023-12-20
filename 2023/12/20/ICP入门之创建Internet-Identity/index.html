@@ -16,30 +16,30 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有时候需要搭建自己的 git 服务器，因为1)项目比较大，如果用github 同步很耗费时间。  2)不想让别人看到自己的代码。  多方研究选择了gitlab 。 群晖其实自带一个叫 Git Server 的套件，不过没有图形界面，而且还要开放ssh端口（ssh端口开放容易被攻击），配置很繁杂，不建议使用，建议使用Docker配合gitlab-ce来搭建。   我看有的教程推荐用中文版的 gi">
+    <meta name="description" content="2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。 什么是Internet IdentityInternet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="群晖NAS使用Docker安装gitlab服务器">
-<meta property="og:url" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:title" content="ICP入门之创建Internet Identity">
+<meta property="og:url" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="有时候需要搭建自己的 git 服务器，因为1)项目比较大，如果用github 同步很耗费时间。  2)不想让别人看到自己的代码。  多方研究选择了gitlab 。 群晖其实自带一个叫 Git Server 的套件，不过没有图形界面，而且还要开放ssh端口（ssh端口开放容易被攻击），配置很繁杂，不建议使用，建议使用Docker配合gitlab-ce来搭建。   我看有的教程推荐用中文版的 gi">
+<meta property="og:description" content="2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。 什么是Internet IdentityInternet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/001.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002-1.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/003.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/004.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/005.jpg">
-<meta property="og:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/006.jpg">
-<meta property="article:published_time" content="2023-02-20T12:36:50.000Z">
-<meta property="article:modified_time" content="2023-02-20T13:25:31.991Z">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/002.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/005.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/006.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png">
+<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png">
+<meta property="article:published_time" content="2023-12-20T09:20:48.000Z">
+<meta property="article:modified_time" content="2023-12-20T14:45:43.464Z">
 <meta property="article:author" content="xianjianxsc">
-<meta property="article:tag" content="整理">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/001.jpg">
+<meta name="twitter:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png">
   
   
   
-  <title>群晖NAS使用Docker安装gitlab服务器 - 黑暗中的矩阵</title>
+  <title>ICP入门之创建Internet Identity - 黑暗中的矩阵</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="群晖NAS使用Docker安装gitlab服务器"></span>
+            <span id="subtitle" data-typed-text="ICP入门之创建Internet Identity"></span>
           
         </div>
 
@@ -232,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-20 20:36" pubdate>
-          2023年2月20日 晚上
+        <time datetime="2023-12-20 17:20" pubdate>
+          2023年12月20日 下午
         </time>
       </span>
     
@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.4k 字
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -301,38 +301,27 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">群晖NAS使用Docker安装gitlab服务器</h1>
+            <h1 style="display: none">ICP入门之创建Internet Identity</h1>
             
             
               <div class="markdown-body">
                 
-                <p>  有时候需要搭建自己的 git 服务器，因为1)项目比较大，如果用github 同步很耗费时间。  2)不想让别人看到自己的代码。  多方研究选择了gitlab 。</p>
-<p>群晖其实自带一个叫 Git Server 的套件，不过没有图形界面，而且还要开放ssh端口（ssh端口开放容易被攻击），配置很繁杂，不建议使用，建议使用Docker配合gitlab-ce来搭建。</p>
-<p>  我看有的教程推荐用中文版的 gitlab-ce-zh 亲测用这个启动docker老是失败，找不到原因，换成英文版的就行了。</p>
-<p>  Gitlab依赖很多，启动速度很慢，而且比较耗资源，如果NAS的配置较差的话，建议不要安装了。</p>
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/001.jpg" srcset="/img/loading.gif" lazyload class="" title="资源占用">
-<p>下载Gitlab镜像<br>  首先打开 Docker 套件，搜索 gitlab-ce，然后双击安装，选择 latest 最新版，现在映像已经到3个G了需要等好一会才能下载完。</p>
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002.jpg" srcset="/img/loading.gif" lazyload class="">
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/002-1.jpg" srcset="/img/loading.gif" lazyload class="">
-
-<p>配置并启动Gitlab容器<br>   首先需要把相关目录建立起来，参考文档配置，本地设置根目录配置为&#x2F;docker&#x2F;gitlab，新建目录</p>
-<p>配置路径映射</p>
-<p>本地路径	              容器路径	           说明<br>&#x2F;docker&#x2F;gitlab&#x2F;data	    &#x2F;var&#x2F;opt&#x2F;gitlab	     数据目录<br>&#x2F;docker&#x2F;gitlab&#x2F;logs	    &#x2F;var&#x2F;log&#x2F;gitlab	     日志目录<br>&#x2F;docker&#x2F;gitlab&#x2F;config	&#x2F;etc&#x2F;gitlab	         配置文件等</p>
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/003.jpg" srcset="/img/loading.gif" lazyload class="">
-<p>配置端口映射，其他端口可以不改变，配置一个需要使用的web端端口。</p>
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/004.jpg" srcset="/img/loading.gif" lazyload class="">
-<p>Gitlab启动速度很慢，需要耐心等待。</p>
-<p>  配置启动好之后，可以通过 <a target="_blank" rel="noopener" href="http://nas_ip_or_domain:5080/">http://nas_ip_or_domain:5080/</a>  来访问。</p>
-<p>启动慢访问可能是404（直接无法访问），稍后可以得到502页面，再等等就好了。</p>
-<p>启动完成后得到登录页面：</p>
-<p>账号：root</p>
-<p>密码：是docker生成的可以参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/cirea1987/article/details/120178421">docker gitlab 初始密码查看</a>  来获取，登录之后修改密码。</p>
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/005.jpg" srcset="/img/loading.gif" lazyload class="">
-  <img src="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/006.jpg" srcset="/img/loading.gif" lazyload class="">
-
-
-<p>然后就可以 使用 git 了，创建project,提交代码， 第一次提交的时候要输入用户名和密码。</p>
-<p>  如果还想了解更多的使用方式可以参考如下文章 比如说使用邮箱功能，这里因为是给自己使用的就不配置了。<br><a target="_blank" rel="noopener" href="https://fugary.com/?p=304">群晖NAS搭建私有Gitlab仓库</a><br><a target="_blank" rel="noopener" href="https://github.com/shaobeichen/blog/issues/11">Gitlab强制推送提示”You are not allowed to force push code to a protected branch on this project</a><br><a target="_blank" rel="noopener" href="https://www.weizhiyong.com/archives/1604">群晖使用Docker安装并配置GitLab服务器</a></p>
+                <p>2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。</p>
+<h2 id="什么是Internet-Identity"><a href="#什么是Internet-Identity" class="headerlink" title="什么是Internet Identity"></a>什么是Internet Identity</h2><p>Internet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的个人信息和在线行为，还包括用户在网络上的各种互动、交易和数字资产。在Web3环境下，Internet Identity 强调去中心化和用户隐私，利用区块链等技术保护用户身份的安全和隐私，同时提供更灵活、透明的身份管理和认证方式。这一概念是理解数字世界中个人与社会互动的关键。</p>
+<h2 id="Internet-Identity如何运作"><a href="#Internet-Identity如何运作" class="headerlink" title="Internet Identity如何运作"></a>Internet Identity如何运作</h2><p>ii 身份验证框架利用 Web 身份验证 (WebAuthn) API 使用智能合约为 Internet computer 上运行的应用程序提供安全的加密身份验证。 Internet Identity 使您能够使用内置于智能手机或笔记本电脑中的安全芯片或插入计算机USB端口的 安全密钥 来验证您的身份并授权访问应用程序。</p>
+<h2 id="如何创建Internet-Identity"><a href="#如何创建Internet-Identity" class="headerlink" title="如何创建Internet Identity"></a>如何创建Internet Identity</h2><ol>
+<li><p>转到 <a target="_blank" rel="noopener" href="https://identity.ic0.app/">Internet Identity</a> 点击 Create Passkey<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png" srcset="/img/loading.gif" lazyload class="" title="Passkey"></p>
+</li>
+<li><p>弹出一个对话框提示设置 安全密钥<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/002.png" srcset="/img/loading.gif" lazyload class=""><br>这里插入USB安全密钥 Yunbikey, 并手动选择<br> 参考:  <a target="_blank" rel="noopener" href="https://developers.google.com/codelabs/webauthn-2fa-key#0">使用安全密钥 (WebAuthn) 进行双重身份验证</a><br>ii 身份所使用的 WebAuthn 是安全密钥最基础的功能,几乎无需配置，在 Firefox 和 Chrome 上均能够做到开箱即用</p>
+</li>
+<li><p>输入安全密钥的 PIN:<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png" srcset="/img/loading.gif" lazyload class=""><br> 至此就成功创建了一个 lnternet ldentlty，并给出用户编号<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png" srcset="/img/loading.gif" lazyload class=""></p>
+</li>
+</ol>
+<p>前面使用 YubiKey 在 Internet Identity 上进行 WebAuthn 注册时，YubiKey 会自动为其生成一个独立的密钥对（公钥和私钥）。将公钥发送到网站，私钥则安全地存储在 YubiKey 内部。这个过程对用户是透明的，不需要用户直接干预。YubiKey 设计有足够的存储空间来保存数百甚至更多的这样的密钥对。</p>
+<p>在 WebAuthn（FIDO2）协议中，私钥是生成并存储在 YubiKey 设备内部的，并且从未离开设备(被设计为不可导出和不可直接查看)。这是一种安全措施，确保私钥不被泄露或外部访问。由于 WebAuthn 密钥的私有性和安全性，它们通常不会在 YubiKey Manager 或其他管理工具中显示。这意味着用户无法直接查看、访问或管理这些密钥。这种设计是为了保护用户的安全和隐私。通过不允许用户（或任何人）访问密钥，减少了密钥被盗用或误用的风险。</p>
+<p>这样在保证安全性的同时也带来了一个问题，那就是存储 安全密钥 的硬件本体的丢失意味着将永远无法完成验证，为了解决这个问题 Internet Identity 提供了多种备份方法，这里单独介绍其助记词方式：</p>
+<p>第一次登录的时候会有个引导页面, 提示创建 Recovery Phrase<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/005.png" srcset="/img/loading.gif" lazyload class=""><br>点击创建之后会给出 24 个助记词 和 用户编号.<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/006.png" srcset="/img/loading.gif" lazyload class=""><br> 对于24个助记词必须要做到:<br>1)只能自己知道，不可泄露给别人，否则别人就可以通过助记词取走资产<br>2)助记词不能丢失，否则安全密钥丢失就没有办法恢复了，资产也就丢失。</p>
+<p>当丢失安全密钥的时候（比如说 YubiKey丢失），就在登录页面点击 Lost access ，然后选择 Use recovery phrase 即可<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png" srcset="/img/loading.gif" lazyload class=""><br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png" srcset="/img/loading.gif" lazyload class=""></p>
 
                 
               </div>
@@ -351,7 +340,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="category-chain-item">系统管理</a>
+  <a href="/categories/web3%E5%BC%80%E5%8F%91/" class="category-chain-item">web3开发</a>
   
   
 
@@ -363,13 +352,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E6%95%B4%E7%90%86/">#整理</a>
-      
-    </div>
-  
 </div>
 
 
@@ -378,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>群晖NAS使用Docker安装gitlab服务器</div>
-      <div>http://example.com/2023/02/20/群晖NAS使用Docker安装gitlab服务器/</div>
+      <div>ICP入门之创建Internet Identity</div>
+      <div>http://example.com/2023/12/20/ICP入门之创建Internet-Identity/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月20日</div>
+          <div>2023年12月20日</div>
         </div>
       
       
@@ -421,18 +403,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/" title="ICP入门之创建Internet Identity">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ICP入门之创建Internet Identity</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/11/%E4%BD%BF%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-youtube-%E8%A7%86%E9%A2%91/" title="使用python脚本下载 youtube 视频">
-                        <span class="hidden-mobile">使用python脚本下载 youtube 视频</span>
+                      <a href="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="群晖NAS使用Docker安装gitlab服务器">
+                        <span class="hidden-mobile">群晖NAS使用Docker安装gitlab服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
