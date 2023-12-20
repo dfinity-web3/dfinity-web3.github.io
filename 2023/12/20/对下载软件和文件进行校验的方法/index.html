@@ -16,31 +16,25 @@
   <meta name="author" content="xianjianxsc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。 什么是Internet IdentityInternet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的">
+    <meta name="description" content="在windows下使用软件要养成安装之前验证的习惯，现在互联网下载软件&#x2F;文件的时候经常会看到官方提供了一段⌈校验和（checksum）⌋或包含校验和的文件供校验。常见的校验和有 md5、SHA 系列等。还有部分软件&#x2F;文件会提供 GPG 校验文件（signature file, SIG）给下载者进行校验,还有的什么都不提供，只能通过 右键-&gt;属性-&gt;数字签名 来判断。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ICP入门之创建Internet Identity">
-<meta property="og:url" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/index.html">
+<meta property="og:title" content="对下载软件和文件进行校验的方法">
+<meta property="og:url" content="http://example.com/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="黑暗中的矩阵">
-<meta property="og:description" content="2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。 什么是Internet IdentityInternet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的">
+<meta property="og:description" content="在windows下使用软件要养成安装之前验证的习惯，现在互联网下载软件&#x2F;文件的时候经常会看到官方提供了一段⌈校验和（checksum）⌋或包含校验和的文件供校验。常见的校验和有 md5、SHA 系列等。还有部分软件&#x2F;文件会提供 GPG 校验文件（signature file, SIG）给下载者进行校验,还有的什么都不提供，只能通过 右键-&gt;属性-&gt;数字签名 来判断。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/002.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/005.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/006.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png">
-<meta property="og:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png">
-<meta property="article:published_time" content="2023-12-20T09:20:48.000Z">
-<meta property="article:modified_time" content="2023-12-20T15:59:47.718Z">
+<meta property="og:image" content="http://example.com/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/001.png">
+<meta property="og:image" content="http://example.com/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/002.png">
+<meta property="article:published_time" content="2023-12-20T15:58:11.000Z">
+<meta property="article:modified_time" content="2023-12-20T16:59:14.091Z">
 <meta property="article:author" content="xianjianxsc">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png">
+<meta name="twitter:image" content="http://example.com/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/001.png">
   
   
   
-  <title>ICP入门之创建Internet Identity - 黑暗中的矩阵</title>
+  <title>对下载软件和文件进行校验的方法 - 黑暗中的矩阵</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ICP入门之创建Internet Identity"></span>
+            <span id="subtitle" data-typed-text="对下载软件和文件进行校验的方法"></span>
           
         </div>
 
@@ -233,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-20 17:20" pubdate>
-          2023年12月20日 下午
+        <time datetime="2023-12-20 23:58" pubdate>
+          2023年12月20日 晚上
         </time>
       </span>
     
@@ -245,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1k 字
         
       </span>
     
@@ -256,7 +250,7 @@
         
         
         
-          12 分钟
+          9 分钟
         
       </span>
     
@@ -302,29 +296,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ICP入门之创建Internet Identity</h1>
+            <h1 style="display: none">对下载软件和文件进行校验的方法</h1>
             
             
               <div class="markdown-body">
                 
-                <p>2021年 5 月 10 日，互联网计算机（简称 IC）主网正式上线，在上线当天其背后孵化组织 DFINITY 基金会也推出了与 IC 网络底层密码学技术 Chain Key 对应的原生身份验证框架 Internet Identity（简称 ii）。</p>
-<h2 id="什么是Internet-Identity"><a href="#什么是Internet-Identity" class="headerlink" title="什么是Internet Identity"></a>什么是Internet Identity</h2><p>Internet Identity”（互联网身份）是指个体在网络空间的身份标识和表现形式。它不仅涉及到用户的个人信息和在线行为，还包括用户在网络上的各种互动、交易和数字资产。在Web3环境下，Internet Identity 强调去中心化和用户隐私，利用区块链等技术保护用户身份的安全和隐私，同时提供更灵活、透明的身份管理和认证方式。这一概念是理解数字世界中个人与社会互动的关键。</p>
-<h2 id="Internet-Identity如何运作"><a href="#Internet-Identity如何运作" class="headerlink" title="Internet Identity如何运作"></a>Internet Identity如何运作</h2><p>ii 身份验证框架利用 Web 身份验证 (WebAuthn) API 使用智能合约为 Internet computer 上运行的应用程序提供安全的加密身份验证。 Internet Identity 使您能够使用内置于智能手机或笔记本电脑中的安全芯片或插入计算机USB端口的 安全密钥 来验证您的身份并授权访问应用程序。</p>
-<h2 id="如何创建Internet-Identity"><a href="#如何创建Internet-Identity" class="headerlink" title="如何创建Internet Identity"></a>如何创建Internet Identity</h2><ol>
-<li><p>转到 <a target="_blank" rel="noopener" href="https://identity.ic0.app/">Internet Identity</a> 点击 Create Passkey<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/001.png" srcset="/img/loading.gif" lazyload class="" title="Passkey"></p>
-</li>
-<li><p>弹出一个对话框提示设置 安全密钥<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/002.png" srcset="/img/loading.gif" lazyload class=""><br>这里插入USB安全密钥 Yunbikey, 并手动选择<br> 参考:  <a target="_blank" rel="noopener" href="https://developers.google.com/codelabs/webauthn-2fa-key#0">使用安全密钥 (WebAuthn) 进行双重身份验证</a><br>ii 身份所使用的 WebAuthn 是安全密钥最基础的功能,几乎无需配置，在 Firefox 和 Chrome 上均能够做到开箱即用</p>
-</li>
-<li><p>输入安全密钥的 PIN:<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/003.png" srcset="/img/loading.gif" lazyload class=""><br> 至此就成功创建了一个 lnternet ldentlty，并得到了用户编号<br>   <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/004.png" srcset="/img/loading.gif" lazyload class=""></p>
-</li>
-</ol>
-<p>前面使用 YubiKey 在 Internet Identity 上进行 WebAuthn 注册时，YubiKey 会自动为其生成一个独立的密钥对（公钥和私钥）。将公钥发送到网站，私钥则安全地存储在 YubiKey 内部。这个过程对用户是透明的，不需要用户直接干预。YubiKey 设计有足够的存储空间来保存数百甚至更多的这样的密钥对。</p>
-<p>在 WebAuthn（FIDO2）协议中，私钥是生成并存储在 YubiKey 设备内部的，并且从未离开设备(被设计为不可导出和不可直接查看)。这是一种安全措施，确保私钥不被泄露或外部访问。由于 WebAuthn 密钥的私有性和安全性，它们通常不会在 YubiKey Manager 或其他管理工具中显示。这意味着用户无法直接查看、访问或管理这些密钥。这种设计是为了保护用户的安全和隐私。通过不允许用户（或任何人）访问密钥，减少了密钥被盗用或误用的风险。</p>
-<p>这样在保证安全性的同时也带来了一个问题，那就是存储 安全密钥 的硬件本体的丢失意味着将永远无法完成验证，为了解决这个问题 Internet Identity 提供了多种备份方法，这里单独介绍其助记词方式：</p>
-<p>第一次登录的时候会有个引导页面, 提示创建 Recovery Phrase<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/005.png" srcset="/img/loading.gif" lazyload class=""><br>点击创建之后会给出 24 个助记词 和 用户编号.<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/006.png" srcset="/img/loading.gif" lazyload class=""><br> 对于24个助记词必须要做到:<br>1)只能自己知道，不可泄露给别人，否则别人就可以通过助记词取走资产<br>2)助记词不能丢失，否则安全密钥丢失就没有办法恢复了，资产也就丢失。</p>
-<p>当丢失安全密钥的时候（比如说 YubiKey丢失），就在登录页面点击 Lost access ，然后选择 Use recovery phrase 即可<br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/007.png" srcset="/img/loading.gif" lazyload class=""><br>         <img src="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/008.png" srcset="/img/loading.gif" lazyload class=""></p>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lk2684753/article/details/118224251">Dfinity(ICP)身份认证和账本快速入门-3</a></p>
+                <p>在windows下使用软件要养成安装之前验证的习惯，现在互联网下载软件&#x2F;文件的时候经常会看到官方提供了一段⌈校验和（checksum）⌋或包含校验和的文件供校验。常见的校验和有 md5、SHA 系列等。还有部分软件&#x2F;文件会提供 GPG 校验文件（signature file, SIG）给下载者进行校验,还有的什么都不提供，只能通过 右键-&gt;属性-&gt;数字签名 来判断。</p>
+<p>这里研究一下每种情形的校验方式 :</p>
+<h3 id="对于校验和的验证"><a href="#对于校验和的验证" class="headerlink" title="对于校验和的验证"></a>对于校验和的验证</h3><p>这种最简单了，下载完之后对下载的文件做一个校验，和网页上给的校验和是否一致即可。在windows下可以通过 CertUtil  命令来获取:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">CertUtil -hashfile &lt;<span class="hljs-built_in">path to</span> <span class="hljs-built_in">file</span>&gt; &lt;hash algorithm&gt;<br></code></pre></td></tr></table></figure>
+
+<p>比如在  <a target="_blank" rel="noopener" href="https://gpg4win.org/download.html">https://gpg4win.org/download.html</a> 下载 Gpg4win ，网页上给出的校验和：<br>  <img src="/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/001.png" srcset="/img/loading.gif" lazyload class=""></p>
+<p>下载下来后自己计算 SHA256 就行了，因为 windows 下计算命令 CertUtil 比起 linux 要麻烦一些，可以写一个脚本，实现把文件拖过去就自动弹出计算对话框：<br>  <img src="/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/002.png" srcset="/img/loading.gif" lazyload class=""><br>脚本代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">echo</span> 请输入选择:<br><span class="hljs-built_in">echo</span> 1: MD5<br><span class="hljs-built_in">echo</span> 2: SHA1<br><span class="hljs-built_in">echo</span> 3: SHA256<br><br><span class="hljs-built_in">set</span> /p num=<br><br><span class="hljs-built_in">echo</span>. <br><span class="hljs-built_in">echo</span>. <br><span class="hljs-built_in">echo</span>. <br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;%num%&quot;</span>==<span class="hljs-string">&quot;1&quot;</span> (<br>certutil -hashfile <span class="hljs-string">&quot;%~n1%~x1&quot;</span> MD5 <br>)<br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;%num%&quot;</span>==<span class="hljs-string">&quot;2&quot;</span> (<br>certutil -hashfile <span class="hljs-string">&quot;%~n1%~x1&quot;</span> SHA1 <br>)<br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;%num%&quot;</span>==<span class="hljs-string">&quot;3&quot;</span> (<br>certutil -hashfile <span class="hljs-string">&quot;%~n1%~x1&quot;</span> SHA256 <br>)<br><br>pause<br></code></pre></td></tr></table></figure>
+<p>通过上面的计算可以看出软件 gpg4win-4.2.0.exe 是没问题的，这是一个官方的 Windows GnuPG 发行版，这个软件 GPG（GnuPG）是一个实现了 OpenPGP 标准的用于数据加密和数字签名的工具。属于全家桶软件，其中包括 GUI 客户端 Kleopatra，用来实现对 GPG密钥签名文件（sig）的校验。</p>
+<p>参考链接：<br><a target="_blank" rel="noopener" href="https://shansan.top/2021/07/10/checksum-gpg-tools/">对下载软件&#x2F;文件进行校验的工具（Checksum and GPG）</a></p>
 
                 
               </div>
@@ -343,7 +329,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/web3%E5%BC%80%E5%8F%91/" class="category-chain-item">web3开发</a>
+  <a href="/categories/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="category-chain-item">系统管理</a>
   
   
 
@@ -370,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ICP入门之创建Internet Identity</div>
-      <div>http://example.com/2023/12/20/ICP入门之创建Internet-Identity/</div>
+      <div>对下载软件和文件进行校验的方法</div>
+      <div>http://example.com/2023/12/20/对下载软件和文件进行校验的方法/</div>
     </div>
     <div class="license-meta">
       
@@ -413,18 +399,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/20/%E5%AF%B9%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%96%B9%E6%B3%95/" title="对下载软件和文件进行校验的方法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">对下载软件和文件进行校验的方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/20/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="群晖NAS使用Docker安装gitlab服务器">
-                        <span class="hidden-mobile">群晖NAS使用Docker安装gitlab服务器</span>
+                      <a href="/2023/12/20/ICP%E5%85%A5%E9%97%A8%E4%B9%8B%E5%88%9B%E5%BB%BAInternet-Identity/" title="ICP入门之创建Internet Identity">
+                        <span class="hidden-mobile">ICP入门之创建Internet Identity</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
